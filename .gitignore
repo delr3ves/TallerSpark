@@ -1,1 +1,5 @@
 .vagrant
+spark-*.tgz
+target
+*.iml
+speakerNotes
