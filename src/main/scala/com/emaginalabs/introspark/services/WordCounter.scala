@@ -5,12 +5,12 @@ import org.apache.spark.SparkContext
 /**
  * @author Sergio Arroyo - @delr3ves
  */
-class WordCounter(spark: SparkContext) {
+class WordCounter(spark: SparkContext, tokenizer: LineTokenizer = new LineTokenizer) {
 
   def countWords(path: String): Long = {
     val fileRDD = spark.textFile(path)
     val wordsRDD = fileRDD
-      .flatMap(_.split(" "))
+      .flatMap(tokenizer.tokenize)
     wordsRDD.count()
   }
 }
