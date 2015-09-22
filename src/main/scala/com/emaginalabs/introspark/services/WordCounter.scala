@@ -9,7 +9,8 @@ class WordCounter(spark: SparkContext) {
 
   def countWords(path: String): Long = {
     val fileRDD = spark.textFile(path)
-    val wordsRDD = fileRDD.flatMap(_.split(" "))
+    val wordsRDD = fileRDD
+      .flatMap(_.split(" "))
     wordsRDD.count()
   }
 }
