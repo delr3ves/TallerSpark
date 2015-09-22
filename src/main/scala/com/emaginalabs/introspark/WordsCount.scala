@@ -19,7 +19,8 @@ object WordsCount extends SparkLauncherUtils {
 
   override def execute(spark: SparkContext, options: CommandLine): Unit = {
     val fileRDD = spark.textFile(options.getOptionValue(FILE_OPTION))
-    val words: Long = fileRDD.count()
+    val wordsRDD = fileRDD.flatMap(_.split(" "))
+    val words: Long = wordsRDD.count()
     println(s"Found $words words")
   }
 
