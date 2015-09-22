@@ -1,0 +1,3 @@
+Run in local mode:
+
+1. From ide, don't forget to add maven local profile as default
