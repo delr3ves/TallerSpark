@@ -2,16 +2,17 @@ package com.emaginalabs.introspark
 
 import org.apache.commons.cli.{CommandLine, Options}
 import org.apache.spark.SparkContext
+import org.apache.spark.rdd.RDD
 
 /**
  * @author Sergio Arroyo - @delr3ves
  */
 
-object UniqueWordsCount extends SparkLauncherUtils {
+object NumberOfWordsByLength extends SparkLauncherUtils {
 
   val FILE_OPTION = "file"
 
-  override def getAppName(): String = "Words counter"
+  override def getAppName(): String = getClass.getSimpleName
 
   override def addSpecificOptions(options: Options): Options = {
     options.addOption(FILE_OPTION, true, "The input file where the words are")
@@ -19,13 +20,12 @@ object UniqueWordsCount extends SparkLauncherUtils {
 
   override def execute(spark: SparkContext, options: CommandLine): Unit = {
     val fileRDD = spark.textFile(options.getOptionValue(FILE_OPTION))
-    val uniqueWordsRDD = fileRDD.flatMap(_.split(" "))
-      .map((_, 1))
-      .groupBy(_._1)
-    val words: Long = uniqueWordsRDD.count
-    println(s"Found $words unique words")
+    val wordsByLengthRDD = fileRDD.flatMap(_.split(" "))
+      .map((word) => (word.length, word))
+      .groupByKey
+      .map((tuple) => (tuple._1, tuple._2.size))
 
-    uniqueWordsRDD.keys.foreach(println)
+    wordsByLengthRDD.foreach(println)
   }
 
 }
