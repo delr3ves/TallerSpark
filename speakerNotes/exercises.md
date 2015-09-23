@@ -38,9 +38,9 @@
 ### ¡¡Be careful with actions (collect in driver is dangerous)!!
 
 2. Work with RDD KeyValue
-	- Count word ocurrences
+	- Count word occurrences
 	- Number of words by length
-	- Count word ocurrences with two files as input (only for words wich are in both files)
+	- Count word occurrences with two files as input (only for words which are in both files)
 
 ## Step 6.
 - Work with structured data
@@ -57,6 +57,5 @@
 - Talk about new RDD inputs (newHadoopApi)
 	- Add mask with matching files
 	- Add mask with no matching files
-
 
 
