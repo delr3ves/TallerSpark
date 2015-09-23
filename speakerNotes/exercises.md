@@ -9,6 +9,7 @@
 - Hello with cache
 	- add dummy transformation with sleep or logger to see it does not hapens twice
 - Show difference between trasnformation an action
+- Show how spark optimizes graph (step2b)
 
 ## Step 3.
 **git checkout step2**
@@ -33,7 +34,7 @@
 	- Maps = Convert all words in capitals
 	- Reduces = Average of characters per word
 	- Unions = Count all words in two files
-	- Intersection = Words wich are in both files
+	- Intersection = Words which are in both files
 
 ### ¡¡Be careful with actions (collect in driver is dangerous)!!
 
