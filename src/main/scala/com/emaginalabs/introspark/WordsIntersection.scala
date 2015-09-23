@@ -2,12 +2,13 @@ package com.emaginalabs.introspark
 
 import org.apache.commons.cli.{CommandLine, Options}
 import org.apache.spark.SparkContext
+import org.apache.spark.rdd.RDD
 
 /**
  * @author Sergio Arroyo - @delr3ves
  */
 
-object WordsUnion extends SparkLauncherUtils {
+object WordsIntersection extends SparkLauncherUtils {
 
   val FILE_OPTION = "file1"
   val ANOTHER_FILE_OPTION = "file2"
@@ -20,14 +21,18 @@ object WordsUnion extends SparkLauncherUtils {
   }
 
   override def execute(spark: SparkContext, options: CommandLine): Unit = {
-    val file1RDD = spark.textFile(options.getOptionValue(FILE_OPTION))
-    val file2RDD = spark.textFile(options.getOptionValue(ANOTHER_FILE_OPTION))
+    val words1RDD = splitToWords(spark.textFile(options.getOptionValue(FILE_OPTION)))
+    val words2RDD = splitToWords(spark.textFile(options.getOptionValue(ANOTHER_FILE_OPTION)))
 
-    val unionRDD = file1RDD.union(file2RDD)
-    val wordsRDD = unionRDD.flatMap(_.split(" "))
-    val words: Long = wordsRDD.count()
+    val intersectionRDD = words1RDD.intersection(words2RDD)
+    val words: Long = intersectionRDD.count()
 
-    println(s"Words after union of two files: $words")
+    println(s"The intersection: $words")
+    intersectionRDD.foreach(println)
+  }
+
+  private def splitToWords(input:RDD[String]) = {
+    input.flatMap(_.split(" "))
   }
 
 }
