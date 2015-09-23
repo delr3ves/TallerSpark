@@ -11,7 +11,7 @@ object CachedWordsCount extends SparkLauncherUtils {
 
   val FILE_OPTION = "file"
 
-  override def getAppName(): String = "Words counter cached"
+  override def getAppName(): String = "CachedWordsCount"
 
   override def addSpecificOptions(options: Options): Options = {
     options.addOption(FILE_OPTION, true, "The input file where the words are")
