@@ -44,19 +44,20 @@
 	- Count word occurrences with two files as input (only for words which are in both files)
 
 ## Step 6.
+- Talk about new RDD inputs (newHadoopApi)
+	- Add mask with matching files
+	- Add mask with no matching files
+
+## Step 7.
 - Work with structured data
 	- Parse csv file
 	- Parse json files and work with them
 
-## Step 7.
+## Step 8.
 - Show spark sql
 	- load from json
 	- load from csv with header
 	- load from csv without header
 
-## Step 8.
-- Talk about new RDD inputs (newHadoopApi)
-	- Add mask with matching files
-	- Add mask with no matching files
 
 
