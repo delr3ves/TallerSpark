@@ -14,7 +14,7 @@ import org.apache.spark.rdd.RDD
 object StructuredDataJson extends SparkLauncherUtils {
 
   val FILE_OPTION = "file"
-  
+
   override def getAppName(): String = "Managing structured data: JSON"
 
   override def addSpecificOptions(options: Options): Options = {
