@@ -25,12 +25,13 @@ object SparkSqlCsvWithHeader extends SparkLauncherUtils {
     val towersDataFrame = sparkSql.read
       .format("com.databricks.spark.csv")
       .option("header", "true")
+      .option("inferSchema", "true")
       .load(options.getOptionValue(FILE_OPTION))
     towersDataFrame.printSchema()
 
     towersDataFrame.registerTempTable("towers")
     val filteredTowers = sparkSql.sql("SELECT radio,cell FROM towers WHERE area = 801")
-    filteredTowers.show()
+    filteredTowers.groupBy("radio").count().show()
 
   }
 
